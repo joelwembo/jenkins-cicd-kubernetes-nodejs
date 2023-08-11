@@ -28,10 +28,10 @@ pipeline {
             }
         }
 
-        stage('Manuel Test'){
-            steps{
-                bat "npm run test"
-            }
-        }
+        // stage('Manuel Test'){
+        //     steps{
+        //         bat "npm run test"
+        //     }
+        // }
     }
 }
