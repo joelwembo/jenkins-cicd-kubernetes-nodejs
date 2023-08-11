@@ -11,20 +11,20 @@ pipeline {
         }
         stage('Build and Test'){
             steps{
-                sh 'docker build . -t joelwembo/node-todo-test:latest'
+                bat 'docker build . -t joelwembo/node-todo-test:latest'
             }
         }
-        stage('Push'){
+        stage('Pubat'){
             steps{
                 // withCredentials([usernamePassword(credentialsId: 'dockerHub', passwordVariable: 'dockerHubPassword', usernameVariable: 'dockerHubUser')]) {
-        	     sh "docker login -u joelwembo -p dckr_pat_R6TOt_udjMePNIXmlgth8jhSe8g"
-                 sh 'docker push joelwembo.com/node-todo-test:latest'
+        	     bat "docker login -u joelwembo -p dckr_pat_R6TOt_udjMePNIXmlgth8jhSe8g"
+                 bat 'docker pubat joelwembo.com/node-todo-test:latest'
                 // }
             }
         }
         stage('Deploy'){
             steps{
-                sh "docker-compose down && docker-compose up -d"
+                bat "docker-compose down && docker-compose up -d"
             }
         }
     }
