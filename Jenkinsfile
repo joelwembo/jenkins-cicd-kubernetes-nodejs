@@ -14,11 +14,11 @@ pipeline {
                 bat 'docker build . -t joelwembo/node-todo-test:latest'
             }
         }
-        stage('Pubat'){
+        stage('Upload to Docker'){
             steps{
                 // withCredentials([usernamePassword(credentialsId: 'dockerHub', passwordVariable: 'dockerHubPassword', usernameVariable: 'dockerHubUser')]) {
-        	     bat "docker login -u joelwembo -p dckr_pat_R6TOt_udjMePNIXmlgth8jhSe8g"
-                 bat 'docker pubat joelwembo.com/node-todo-test:latest'
+        	     bat "docker login -u joelwembo"
+                 bat "docker pubat joelwembo.com/node-todo-test:latest"
                 // }
             }
         }
