@@ -30,7 +30,7 @@ pipeline {
 
         stage('Manuel Test'){
             steps{
-                bat "node test.js"
+                bat "npm run test"
             }
         }
     }
