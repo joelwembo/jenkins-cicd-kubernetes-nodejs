@@ -16,10 +16,10 @@ pipeline {
         }
         stage('Push'){
             steps{
-                withCredentials([usernamePassword(credentialsId: 'dockerHub', passwordVariable: 'dockerHubPassword', usernameVariable: 'dockerHubUser')]) {
-        	     sh "docker login -u ${env.dockerHubUser} -p ${env.dockerHubPassword}"
+                // withCredentials([usernamePassword(credentialsId: 'dockerHub', passwordVariable: 'dockerHubPassword', usernameVariable: 'dockerHubUser')]) {
+        	     sh "docker login -u joelwembo -p dckr_pat_R6TOt_udjMePNIXmlgth8jhSe8g"
                  sh 'docker push joelwembo.com/node-todo-test:latest'
-                }
+                // }
             }
         }
         stage('Deploy'){
