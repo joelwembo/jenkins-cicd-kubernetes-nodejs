@@ -1,4 +1,5 @@
 // Requiring module
+var mocha = require('mocha')
 const assert = require('assert');
 var describe = mocha.describe
 
