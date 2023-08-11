@@ -1,5 +1,6 @@
 // Requiring module
 const assert = require('assert');
+var describe = mocha.describe
 
 // We can group similar tests inside a describe block
 describe("Simple Calculations", () => {
