@@ -4,4 +4,5 @@ COPY . .
 RUN npm install
 RUN npm run test
 EXPOSE 8000
+EXPOSE 80
 CMD ["node","app.js"]
