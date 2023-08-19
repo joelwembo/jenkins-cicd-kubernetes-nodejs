@@ -11,7 +11,7 @@ pipeline {
         }
         stage('Build'){
             steps{
-                sh 'docker build -t node-app .'
+                sh 'docker build -t node-app:latest .'
             }
         }
         // stage('Upload to Docker'){
