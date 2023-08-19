@@ -9,9 +9,9 @@ pipeline {
                 git url: 'https://github.com/joelwembo/jenkins-cicd-nodejs.git', branch: 'main' 
             }
         }
-        stage('Build and Test'){
+        stage('Build'){
             steps{
-                bat 'docker build . -t joelwembo/node-todo-test:latest'
+                sh 'docker build -t node-app .'
             }
         }
         // stage('Upload to Docker'){
@@ -24,14 +24,14 @@ pipeline {
         // }
         stage('Deploy'){
             steps{
-                bat "docker-compose down && docker-compose up -d"
+                sh "docker run -d --name node-todo-app -p 80:80 node-app:latest"
             }
         }
 
-        // stage('Manuel Test'){
-        //     steps{
-        //         bat "npm run test"
-        //     }
-        // }
+        stage('Manuel Test'){
+            steps{
+                sh "npm run test"
+            }
+        }
     }
 }
