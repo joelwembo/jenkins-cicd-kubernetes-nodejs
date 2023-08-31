@@ -24,7 +24,7 @@ pipeline {
         stage('Build'){
             steps{
                 // sh 'docker rmi $(docker images -q)'
-                sh 'docker build -t node-app:latest .'
+                sh 'docker build -t joelwembo/node-app:latest .'
             }
         }
          stage('Login') {
@@ -34,19 +34,20 @@ pipeline {
         }
         stage('Push') {
           steps {
-            sh 'docker push joelwembo.com/node-app:latest'
+            sh 'docker push joelwembo/node-app:latest'
           }
         }
-        stage('Deploy'){
-            steps{
-                sh "docker run -d --name node-todo-app -p 4000:4000 node-app:latest"
-            }
-        }
-
         stage('Manuel Test'){
             steps{
                 sh "npm run test"
             }
         }
+        stage('Deploy'){
+            steps{
+                sh "docker run -d --name node-todo-app -p 4000:4000 joelwembo/node-app:latest"
+            }
+        }
+
+        
     }
 }
