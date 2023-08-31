@@ -15,6 +15,9 @@ pipeline {
                 git url: 'https://github.com/joelwembo/jenkins-cicd-nodejs.git', branch: 'main' 
             }
         }
+        stage('Dependencies') {
+            sh 'npm ci'
+        }
         stage('Build'){
             steps{
                 sh 'docker build -t node-app:latest .'
