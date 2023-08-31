@@ -59,6 +59,7 @@ pipeline {
                 sh 'git clone https://github.com/joelwembo/jenkins-cicd-nodejs.git'
                 sh 'cd jenkins-cicd-nodejs'
                 sh 'npm install --force'
+                sh 'minikube ip'
 
             }
         }
