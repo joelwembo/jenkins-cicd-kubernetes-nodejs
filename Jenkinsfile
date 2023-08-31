@@ -20,6 +20,12 @@ pipeline {
             sh 'npm ci'
             }
         }
+
+        stage('Unit Test 1'){
+            steps{
+                sh "npm run test"
+            }
+        }
         
         stage('Build'){
             steps{
