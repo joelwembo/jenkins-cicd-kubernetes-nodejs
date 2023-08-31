@@ -23,7 +23,7 @@ pipeline {
         
         stage('Build'){
             steps{
-                // sh 'docker rmi $(docker images -q)'
+                sh 'sudo docker stop $(sudo docker ps | grep "joelwembo/node-app:latest" | cut -d " " -f 1)'
                 sh 'docker build -t joelwembo/node-app:latest .'
             }
         }
