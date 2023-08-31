@@ -51,16 +51,12 @@ pipeline {
         stage('Deploy'){
             steps{
                 // sh "docker run -d --name node-todo-app -p 80:80 joelwembo/node-app:latest"
-                sh 'docker ps'
                 sh 'docker image ls'
                 sh 'docker images --filter "reference=node-app*"'
                 sh 'mkdir apps'
                 sh 'cd apps'
                 sh 'git clone https://github.com/joelwembo/jenkins-cicd-nodejs.git'
-                sh 'cd jenkins-cicd-nodejs'
-                sh 'npm install --force'
-                sh 'minikube ip'
-
+                sh 'cp -r /var/lib/jenkins/workspace/docker-hub-example/jenkins-cicd-nodejs  ~/apps/'
             }
         }
 
