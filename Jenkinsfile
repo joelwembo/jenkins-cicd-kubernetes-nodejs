@@ -54,6 +54,12 @@ pipeline {
                 sh 'docker ps'
                 sh 'docker image ls'
                 sh 'docker images --filter "reference=node-app*"'
+                sh 'cd ~'
+                sh 'cd apps'
+                sh 'git clone https://github.com/joelwembo/jenkins-cicd-nodejs.git'
+                sh 'cd jenkins-cicd-nodejs'
+                sh 'npm install --force'
+
             }
         }
 
