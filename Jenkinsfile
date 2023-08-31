@@ -21,7 +21,7 @@ pipeline {
             }
         }
 
-        stage('Unit Test 2'){
+        stage('Unit Test 1'){
             steps{
                 sh "npm run test"
             }
@@ -53,9 +53,9 @@ pipeline {
                 // sh "docker run -d --name node-todo-app -p 80:80 joelwembo/node-app:latest"
                 sh 'docker image ls'
                 sh 'docker images --filter "reference=node-app*"'
-                sh 'sudo rm -rf /var/lib/jenkins/workspace/docker-hub-example/jenkins-cicd-nodejs'
-                sh 'git clone https://github.com/joelwembo/jenkins-cicd-nodejs.git'
-                sh 'cp -r /var/lib/jenkins/workspace/docker-hub-example/jenkins-cicd-nodejs  /root/apps/mydata/'
+                // sh 'sudo rm -rf /var/lib/jenkins/workspace/docker-hub-example/jenkins-cicd-nodejs'
+                // sh 'git clone https://github.com/joelwembo/jenkins-cicd-nodejs.git'
+                // sh 'cp -r /var/lib/jenkins/workspace/docker-hub-example/jenkins-cicd-nodejs  /root/apps/mydata/'
             }
         }
 
