@@ -55,7 +55,7 @@ pipeline {
                 sh 'docker images --filter "reference=node-app*"'
                 sh 'sudo rm -rf /var/lib/jenkins/workspace/docker-hub-example/jenkins-cicd-nodejs'
                 sh 'git clone https://github.com/joelwembo/jenkins-cicd-nodejs.git'
-                sh 'cp -r /var/lib/jenkins/workspace/docker-hub-example/jenkins-cicd-nodejs  ~/apps/'
+                sh 'cp -r /var/lib/jenkins/workspace/docker-hub-example/jenkins-cicd-nodejs  /root/apps/mydata/'
             }
         }
 
