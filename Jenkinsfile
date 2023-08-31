@@ -57,7 +57,6 @@ pipeline {
                 sh 'sudo rm -rf jenkins-cicd-nodejs'
                 sh 'git clone https://github.com/joelwembo/jenkins-cicd-nodejs.git'
                 sh 'cp -r /var/lib/jenkins/workspace/docker-hub-example/jenkins-cicd-nodejs  ~/apps/'
-                sh 'cd ~/apps/jenkins-cicd-nodejs'
             }
         }
 
