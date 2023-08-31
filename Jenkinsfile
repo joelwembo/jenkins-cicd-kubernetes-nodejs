@@ -53,9 +53,9 @@ pipeline {
                 // sh "docker run -d --name node-todo-app -p 80:80 joelwembo/node-app:latest"
                 sh 'docker image ls'
                 sh 'docker images --filter "reference=node-app*"'
-                sh 'cd apps && sudo rm -rf jenkins-cicd-nodejs'
+                sh 'sudo rm -rf /var/lib/jenkins/workspace/docker-hub-example/jenkins-cicd-nodejs'
                 sh 'git clone https://github.com/joelwembo/jenkins-cicd-nodejs.git'
-                sh 'cd ~ && cp -r /var/lib/jenkins/workspace/docker-hub-example/jenkins-cicd-nodejs  ~/apps/'
+                sh 'cp -r /var/lib/jenkins/workspace/docker-hub-example/jenkins-cicd-nodejs  ~/apps/'
             }
         }
 
