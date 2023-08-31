@@ -23,7 +23,7 @@ pipeline {
         
         stage('Build'){
             steps{
-                sh 'docker stop $(sudo docker ps | grep "joelwembo/node-app:latest" | cut -d " " -f 1 status=exited)'
+                sh 'docker stop $(docker ps | grep "joelwembo/node-app:latest" | cut -d " " -f 1 status=exited)'
                 sh 'docker build -t joelwembo/node-app:latest .'
             }
         }
