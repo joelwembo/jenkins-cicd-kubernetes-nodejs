@@ -44,7 +44,8 @@ pipeline {
         }
         stage('Deploy'){
             steps{
-                sh "docker run -d --name node-todo-app -p 80:80 joelwembo/node-app:latest"
+                // sh "docker run -d --name node-todo-app -p 80:80 joelwembo/node-app:latest"
+                sh 'docker ps'
             }
         }
 
