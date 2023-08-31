@@ -1,5 +1,11 @@
 pipeline {
     agent any
+    options {
+        buildDiscarder(logRotator(numToKeepStr: '5'))
+      }
+      environment {
+        DOCKERHUB_CREDENTIALS = credentials('globaldockerhub')
+      }
 
     tools { nodejs "NodeJS"}
     
@@ -14,17 +20,19 @@ pipeline {
                 sh 'docker build -t node-app:latest .'
             }
         }
-        // stage('Upload to Docker'){
-        //     steps{
-        //         // withCredentials([usernamePassword(credentialsId: 'dockerHub', passwordVariable: 'dockerHubPassword', usernameVariable: 'dockerHubUser')]) {
-        // 	     bat "docker login -u joelwembo"
-        //          bat "docker pubat joelwembo.com/node-todo-test:latest"
-        //         // }
-        //     }
-        // }
+         stage('Login') {
+          steps {
+            sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
+          }
+        }
+        stage('Push') {
+          steps {
+            sh 'docker push joelwembo.com/node-todo-test:latest'
+          }
+        }
         stage('Deploy'){
             steps{
-                sh "docker run -d --name node-todo-app -p 80:80 node-app:latest"
+                sh "docker run -d --name node-todo-app -p 4000:4000 node-app:latest"
             }
         }
 
