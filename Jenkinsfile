@@ -52,7 +52,8 @@ pipeline {
             steps{
                 // sh "docker run -d --name node-todo-app -p 80:80 joelwembo/node-app:latest"
                 sh 'docker ps'
-                sh 'docker image ls -all'
+                sh 'docker image ls'
+                sh 'docker images --filter "reference=node-app*"'
             }
         }
 
