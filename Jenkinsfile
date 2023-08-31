@@ -12,17 +12,25 @@ pipeline {
     stages{
         stage('Code'){
             steps{
-                git url: 'https://github.com/joelwembo/jenkins-cicd-nodejs.git', branch: 'main' 
+                git url: 'https://github.com/joelwembo/jenkins-cicd-nodejs.git' 
             }
         }
         stage('Dependencies') {
+            steps{
             sh 'npm ci'
+            }
+        }
+
+        stage('Unit Test 1'){
+            steps{
+                sh "npm run test"
+            }
         }
         
         stage('Build'){
             steps{
-                sh 'docker rmi $(docker images -q)'
-                sh 'docker build -t node-app:latest .'
+                // sh 'docker stop $(docker ps | grep "joelwembo/node-app:latest" | cut -d " " -f 1)'
+                sh 'docker build -t joelwembo/node-app:latest .'
             }
         }
          stage('Login') {
@@ -32,19 +40,23 @@ pipeline {
         }
         stage('Push') {
           steps {
-            sh 'docker push joelwembo.com/node-todo-test:latest'
+            sh 'docker push joelwembo/node-app:latest'
           }
         }
-        stage('Deploy'){
-            steps{
-                sh "docker run -d --name node-todo-app -p 4000:4000 node-app:latest"
-            }
-        }
-
         stage('Manuel Test'){
             steps{
                 sh "npm run test"
             }
         }
+        stage('Deploy'){
+            steps{
+                // sh "docker run -d --name node-todo-app -p 80:80 joelwembo/node-app:latest"
+                sh 'docker ps'
+                sh 'docker image ls'
+                sh 'docker images --filter "reference=node-app*"'
+            }
+        }
+
+        
     }
 }
