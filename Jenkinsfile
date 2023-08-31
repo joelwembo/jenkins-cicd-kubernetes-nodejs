@@ -12,7 +12,7 @@ pipeline {
     stages{
         stage('Code'){
             steps{
-                git url: 'https://github.com/joelwembo/jenkins-cicd-nodejs.git', branch: 'main' 
+                git url: 'https://github.com/joelwembo/jenkins-cicd-nodejs.git' 
             }
         }
         stage('Dependencies') {
@@ -34,7 +34,7 @@ pipeline {
         }
         stage('Push') {
           steps {
-            sh 'docker push joelwembo.com/node-todo-test:latest'
+            sh 'docker push joelwembo.com/node-app:latest'
           }
         }
         stage('Deploy'){
