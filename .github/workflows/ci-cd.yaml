@@ -25,6 +25,7 @@ jobs:
           node-version: ${{ matrix.node-version }}
           cache: 'npm'
       - run: npm ci
+      - run: npm install --global mocha
       - run: npm run build --if-present
 
   test-stage:
@@ -33,6 +34,7 @@ jobs:
     steps:
       - name: Running Tests
         uses: actions/checkout@v3
+      - run: npm install --save-dev mocha  
       - run: npm run test
 
   build-and-push-docker-image:
