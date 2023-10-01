@@ -1,21 +1,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: reactprodx
+  name: nodeprodx
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: reactprodx
+      app: nodeprodx
   template:
     metadata:
       labels:
-        app: reactprodx
+        app: nodeprodx
     spec:
       restartPolicy: Always
       containers:
-      - name: reactprodx
-        image: joelwembo/reactprodx:latest
+      - name: nodeprodx
+        image: joelwembo/nodeprodx:latest
         # imagePullPolicy: Always
         ports:
           - containerPort: 80
@@ -37,7 +37,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:  
-  name: reactprodx
+  name: nodeprodx
 spec:
   externalIPs:
   - 18.141.186.159
@@ -47,7 +47,7 @@ spec:
     targetPort: 80
     nodePort: 31000
   selector:
-    app: reactprodx
+    app: nodeprodx
   type: LoadBalancer
 status:
   loadBalancer: {}              
