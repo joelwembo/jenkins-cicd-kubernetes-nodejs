@@ -33,7 +33,7 @@ jobs:
     steps:
       - name: Running Tests
         uses: actions/checkout@v3
-      - run: echo "running Tests"
+      - run: npm run test
 
   build-and-push-docker-image:
     name: Build Docker image and push to repositories
