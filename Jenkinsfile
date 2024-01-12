@@ -29,7 +29,7 @@ pipeline {
         
         stage('Build'){
             steps{
-                sh 'docker stop $(docker ps | grep "joelwembo/nodeprodx:latest" | cut -d " " -f 1)'
+                // sh 'docker stop $(docker ps | grep "joelwembo/nodeprodx:latest" | cut -d " " -f 1)'
                 sh 'docker build -t joelwembo/nodeprodx:latest .'
             }
         }
@@ -50,7 +50,7 @@ pipeline {
         }
         stage('Deploy'){
             steps{
-                sh "docker run -d --name node-todo-app -p 80:80 joelwembo/nodeprodx:latest"
+                sh "docker run -d --name node-todo-app -p 3000:3000 joelwembo/nodeprodx:latest"
                 sh 'docker image ls'
                 sh 'docker images --filter "reference=nodeprodx*"'                 
             }
@@ -58,7 +58,7 @@ pipeline {
 
          stage('Kubernetes') {
           steps {
-            sh 'sudo minikube ip'
+            sh 'minikube ip'
             sh 'kubectl cluster-info'
             dir('deployments') {
               sh 'kubectl delete namespace nodeprodx'
