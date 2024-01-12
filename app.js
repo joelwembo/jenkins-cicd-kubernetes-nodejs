@@ -23,6 +23,11 @@ app.use(methodOverride(function (req, res) {
 
 let todolist = [];
 
+
+app.get('/', function (req, res) {
+    res.send(`NodeJS Application and PostgreSQL Backend Rest API Server running at port ${port}`)
+})
+
 /* The to do list and the form are displayed */
 app.get('/todo', function (req, res) {
         res.render('todo.ejs', {
@@ -30,6 +35,8 @@ app.get('/todo', function (req, res) {
             clickHandler: "func1();"
         });
     })
+
+
 
     /* Adding an item to the to do list */
     .post('/todo/add/', function (req, res) {
