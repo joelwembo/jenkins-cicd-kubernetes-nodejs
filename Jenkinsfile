@@ -66,7 +66,9 @@ pipeline {
               sh 'kubectl config set-context --current --namespace=nodeprodx'
               sh 'kubectl apply -f deployment.yaml'
             }    
-      }
+         }
+
+         }
       stage('Deploy to AWS') {
             steps {
                  dir('deployments') {
