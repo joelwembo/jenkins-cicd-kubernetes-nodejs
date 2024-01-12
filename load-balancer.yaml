@@ -4,9 +4,9 @@ metadata:
   name: nodeprodx
 spec:
   externalIPs:
-  - 18.141.186.159
+  - 20.6.232.125
   ports:
-  - port: 8080
+  - port: 80
     protocol: TCP
     targetPort: 80
     nodePort: 31000
