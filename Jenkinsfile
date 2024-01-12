@@ -29,8 +29,8 @@ pipeline {
         
         stage('Build'){
             steps{
-                // sh 'docker stop $(docker ps | grep "joelwembo/node-app:latest" | cut -d " " -f 1)'
-                sh 'docker build -t joelwembo/node-app:latest .'
+                sh 'docker stop $(docker ps | grep "joelwembo/nodeprodx:latest" | cut -d " " -f 1)'
+                sh 'docker build -t joelwembo/nodeprodx:latest .'
             }
         }
          stage('Login') {
@@ -40,7 +40,7 @@ pipeline {
         }
         stage('Push') {
           steps {
-            sh 'docker push joelwembo/node-app:latest'
+            sh 'docker push joelwembo/nodeprodx:latest'
           }
         }
         stage('Manuel Test'){
@@ -50,14 +50,57 @@ pipeline {
         }
         stage('Deploy'){
             steps{
-                // sh "docker run -d --name node-todo-app -p 80:80 joelwembo/node-app:latest"
+                sh "docker run -d --name node-todo-app -p 80:80 joelwembo/nodeprodx:latest"
                 sh 'docker image ls'
-                sh 'docker images --filter "reference=node-app*"'
-                // sh 'sudo rm -rf /var/lib/jenkins/workspace/docker-hub-example/jenkins-cicd-nodejs'
-                // sh 'git clone https://github.com/joelwembo/jenkins-cicd-nodejs.git'
-                // sh 'cp -r /var/lib/jenkins/workspace/docker-hub-example/jenkins-cicd-nodejs  /root/apps/mydata/'
+                sh 'docker images --filter "reference=nodeprodx*"'                 
             }
         }
+
+         stage('Kubernetes') {
+          steps {
+            sh 'sudo minikube ip'
+            sh 'kubectl cluster-info'
+            dir('deployments') {
+              sh 'kubectl delete namespace nodeprodx'
+              sh 'kubectl create namespace nodeprodx'
+              sh 'kubectl config set-context --current --namespace=nodeprodx'
+              sh 'kubectl apply -f deployment.yaml'
+            }    
+      }
+      stage('Deploy to AWS') {
+            steps {
+                 dir('deployments') {
+                    sh "pwd"
+                    sh "chmod +x -R ./deploy-aws-ec2.sh"
+                    sh 'docker images --filter "reference=nodeprodx*"' 
+                    sh './deploy-aws-ec2.sh'
+                 }
+              
+            }
+        } 
+    }  
+
+        // post {
+    //         success {
+    //             script {
+    //                 currentBuild.result = 'SUCCESS'
+    //                 slackSend(color: 'good', message: "Deployment successful! :tada:", channel: "#DEV")
+    //                 emailext subject: 'Deployment Successful',
+    //                         body: 'Deployment was successful!',
+    //                         recipientProviders: [[$class: 'CulpritsRecipientProvider']]
+    //             }
+    //         }
+    //         failure {
+    //             script {
+    //                 currentBuild.result = 'FAILURE'
+    //                 slackSend(color: 'danger', message: "Deployment failed. :x:", channel: "#DEV")
+    //                 emailext subject: 'Deployment Failed',
+    //                         body: 'Deployment failed!',
+    //                         recipientProviders: [[$class: 'CulpritsRecipientProvider']]
+    //             }
+    //         }
+
+    //     }
 
         
     }
