@@ -56,19 +56,19 @@ pipeline {
             }
         }
 
-        //  stage('Kubernetes') {
-        //   steps {
-        //     sh 'minikube ip'
-        //     sh 'kubectl cluster-info'
-        //     dir('deployments') {
-        //       sh 'kubectl delete namespace nodeprodx'
-        //       sh 'kubectl create namespace nodeprodx'
-        //       sh 'kubectl config set-context --current --namespace=nodeprodx'
-        //       sh 'kubectl apply -f deployment.yaml'
-        //     }    
-        //  }
+         stage('Kubernetes') {
+          steps {
+            sh 'minikube ip'
+            sh 'kubectl cluster-info'
+            dir('deployments') {
+              sh 'kubectl delete namespace nodeprodx'
+              sh 'kubectl create namespace nodeprodx'
+              sh 'kubectl config set-context --current --namespace=nodeprodx'
+              sh 'kubectl apply -f deployment.yaml'
+              }    
+           }
 
-        //  }
+        }
     //   stage('Deploy to AWS') {
     //         steps {
     //              dir('deployments') {
