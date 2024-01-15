@@ -50,7 +50,7 @@ pipeline {
         }
         stage('Deploy'){
             steps{
-                sh "docker run -d --name node-todo-app -p 3000:3000 joelwembo/nodeprodx:latest"
+                // sh "docker run -d --name node-todo-app -p 3000:3000 joelwembo/nodeprodx:latest"
                 sh 'docker image ls'
                 sh 'docker images --filter "reference=nodeprodx*"'                 
             }
