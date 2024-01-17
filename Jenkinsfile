@@ -12,7 +12,7 @@ pipeline {
     stages{
         stage('Code'){
             steps{
-                git url: 'https://github.com/joelwembo/jenkins-cicd-kubernetes-nodejs.git' 
+                git url: 'https://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@github.com/joelwembo/jenkins-cicd-kubernetes-nodejs.git' 
             }
         }
         stage('Dependencies') {
@@ -56,17 +56,17 @@ pipeline {
             }
         }
 
-         stage('Kubernetes') {
-          steps {
-            sh 'sudo minikube start'
-            sh 'minikube ip'
-            sh 'kubectl cluster-info'
-            sh 'kubectl delete namespace nodeprodx'
-            sh 'kubectl create namespace nodeprodx'
-            sh 'kubectl config set-context --current --namespace=nodeprodx'
-            sh 'kubectl apply -f deployment.yaml'
-              }    
-           }
+        //  stage('Kubernetes') {
+        //   steps {
+        //     sh 'sudo minikube start'
+        //     sh 'minikube ip'
+        //     sh 'kubectl cluster-info'
+        //     sh 'kubectl delete namespace nodeprodx'
+        //     sh 'kubectl create namespace nodeprodx'
+        //     sh 'kubectl config set-context --current --namespace=nodeprodx'
+        //     sh 'kubectl apply -f deployment.yaml'
+        //       }    
+        //    }
 
         }
     //   stage('Deploy to AWS') {
