@@ -1,0 +1,7 @@
+sh 'sudo minikube start'
+sh 'minikube ip'
+sh 'kubectl cluster-info'
+sh 'kubectl delete namespace nodeprodx'
+sh 'kubectl create namespace nodeprodx'
+sh 'kubectl config set-context --current --namespace=nodeprodx'
+sh 'kubectl apply -f deployment.yaml'
