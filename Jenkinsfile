@@ -12,7 +12,7 @@ pipeline {
     stages{
         stage('Code'){
             steps{
-                git url: 'https://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@github.com/joelwembo/jenkins-cicd-kubernetes-nodejs.git' 
+                git url: 'https://token@github.com/joelwembo/jenkins-cicd-kubernetes-nodejs.git' 
             }
         }
         stage('Dependencies') {
